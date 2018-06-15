@@ -5,7 +5,14 @@ import conglin.markdown.MarkdownProcessor;
 import java.io.*;
 import java.util.Scanner;
 
+/**
+ * 测试类，负责测试 MarkdownProcessor
+ */
 public class TestMarkdownProcessor {
+    /**
+     * 主方法
+     * @param args
+     */
     public static void main(String[] args) {
         try(Scanner scan = new Scanner(System.in)) {    //从标准输入流中读取信息
             System.out.print("Please enter the name of source file: ");
@@ -19,7 +26,11 @@ public class TestMarkdownProcessor {
         }
     }
 
-
+    /**
+     * 检测MarkdownProcessor具体方法
+     * @param sourceFileName
+     * @throws FileNotFoundException
+     */
     public static void process(String sourceFileName) throws FileNotFoundException {
         String destinationFileName = sourceFileName + ".html";
         File sourceFile = new File(sourceFileName);

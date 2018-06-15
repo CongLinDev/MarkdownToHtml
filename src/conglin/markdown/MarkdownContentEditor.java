@@ -17,15 +17,21 @@ public class MarkdownContentEditor {
     public final static int LESS_TAB_WIDTH = 3;
 
     /**
-     * 构造方法生成对象
+     * 由String构造生成对象
      * @param _markdownContent
      */
     public MarkdownContentEditor(String _markdownContent){
         this.markdownContent = new StringBuffer(_markdownContent);
     }
+
+    /**
+     * 由StringBuffer构造生成对象
+     * @param _markdownContent
+     */
     public MarkdownContentEditor(StringBuffer _markdownContent) {
         this.markdownContent = _markdownContent;
     }
+
     /**
      * 返回一个String字符串
      * @return
@@ -97,7 +103,7 @@ public class MarkdownContentEditor {
 
     /**
      * 制表符转空格，默认为4个
-     * @param tabWidth  Number of spaces per tab.
+     * @param tabWidth
      * @return
      */
     public MarkdownContentEditor tabToSpaces(int tabWidth){
@@ -115,6 +121,10 @@ public class MarkdownContentEditor {
         });
         return this;
     }
+    /**
+     * 制表符转空格，默认为4个
+     * @return
+     */
      public MarkdownContentEditor tabToSpaces(){
          return tabToSpaces(TAB_WIDTH);
      }
@@ -181,6 +191,4 @@ public class MarkdownContentEditor {
         }
         return new MarkdownContentEditor(stringBuffer);
     }
-
-
 }

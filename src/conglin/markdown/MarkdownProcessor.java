@@ -4,7 +4,6 @@ import conglin.link.LinkDefinition;
 import conglin.replacement.Replacement;
 
 import java.util.Map;
-import java.util.Random;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,7 +18,8 @@ public class MarkdownProcessor {
     private Map<String, LinkDefinition> linkDefinitions = new TreeMap<String, LinkDefinition>();
 
     /**
-     * 创建一个对象
+     * 由String构造生成对象
+     * @param markdownContent
      */
     public MarkdownProcessor(String markdownContent) {
         this.listLevel = 0;
@@ -29,6 +29,11 @@ public class MarkdownProcessor {
             markdownContentEditor = new MarkdownContentEditor(markdownContent);
         }
     }
+
+    /**
+     * 由StringBuffer构造生成对象
+     * @param markdownContent
+     */
     public MarkdownProcessor(StringBuffer markdownContent) {
         this.listLevel = 0;
         if(markdownContent == null){
@@ -80,7 +85,6 @@ public class MarkdownProcessor {
         return _markdownContentEditor;
     }
 
-
     /**
      * 格式化内容，将换行符统一为\n
      * @param _markdownContentEditor
@@ -89,59 +93,6 @@ public class MarkdownProcessor {
     private MarkdownContentEditor formatContent(MarkdownContentEditor _markdownContentEditor){
         _markdownContentEditor.replaceAll("\\r\\n", "\n"); 	// DOS to Unix
         _markdownContentEditor.replaceAll("\\r", "\n");    	// Mac to Unix
-        return _markdownContentEditor;
-    }
-
-    /**
-     * 去除html标签
-     * @param _markdownContentEditor
-     * @return
-     */
-    private MarkdownContentEditor hashHtmlBlock(MarkdownContentEditor _markdownContentEditor){
-        String[] tagsA = {
-                "p", "div", "h1", "h2", "h3", "h4", "h5", "h6", "blockquote", "pre", "table",
-                "dl", "ol", "ul", "script", "noscript", "form", "fieldset", "iframe", "math"
-        };
-        String[] tagsB = {"ins", "del"};
-
-        //将数组tagsA中元素用‘|’连接起来构造正则表达式
-        String alternationA = String.join("|", tagsA);
-        String alternationB = alternationA + "|" + String.join("|", tagsB);
-        //处理的对象protectHTML
-        Replacement protectHTML = new Replacement() {
-            public String replacementString(Matcher matcher) {
-                return "\n\n" + matcher.group() + "\n\n";
-            }
-        };
-
-        //为了处理多层标签嵌套，规定多层标签必须缩进 例如：
-        //   <div>
-        //       <div>
-        //            多层标签必须缩进！
-        //       </div>
-        //   </div>
-        //
-        //patternA的正则为：  (^<( alternationA )\b(.*\n)*?</\2>[ ]*(?=\n+|\Z))
-        Pattern patternA = Pattern.compile("(" +
-                "^<(" + alternationA + ")" +
-                "\\b" +
-                "(.*\\n)*?" +
-                "</\\2>" +
-                "[ ]*" +
-                "(?=\\n+|\\Z))", Pattern.MULTILINE | Pattern.CASE_INSENSITIVE);
-        _markdownContentEditor.replaceAll(patternA, protectHTML);
-
-        //patternB的正则为：  (^<( alternationB )\b(.*\n)*?</\2>[ ]*(?=\n+|\Z))
-        //patternB简单地匹配更多的标签
-        Pattern patternB = Pattern.compile("(" +
-                "^<(" + alternationB + ")" +
-                "\\b" +
-                "(.*\\n)*?" +
-                ".*</\\2>" +
-                "[ ]*" +
-                "(?=\\n+|\\Z))", Pattern.MULTILINE | Pattern.CASE_INSENSITIVE);
-        _markdownContentEditor.replaceAll(patternB, protectHTML);
-
         return _markdownContentEditor;
     }
 
@@ -273,9 +224,7 @@ public class MarkdownProcessor {
             public String replacementString(Matcher matcher) {
                 String address = matcher.group(1);
                 MarkdownContentEditor tempEditor = new MarkdownContentEditor(address);
-                String addr = encodeEmail(tempEditor.toString());
-                String url = encodeEmail("mailto:" + tempEditor.toString());
-                return "<a href=\"" + url + "\">" + addr + "</a>";
+                return "<a href=\"" + "mailto:" + tempEditor.toString() + "\">" + tempEditor.toString() + "</a>";
             }
         });
         return _markdownContentEditor;
@@ -284,7 +233,7 @@ public class MarkdownProcessor {
     /**
      * 处理参考式链接
      * 例如：
-     *    从林的Github][1]
+     *    [从林的Github][1]
      *    [从林的Github博客主页][2]
      *    [1]:https://github.com/CongLinDev
      *    [2]:https:://CongLinDev.github.io "这是一个可选的标题"
@@ -369,32 +318,6 @@ public class MarkdownProcessor {
            }
         });
         return _markdownContentEditor;
-    }
-
-    /**
-     * 处理邮件细节
-     * @param string
-     * @return
-     */
-    private String encodeEmail(String string) {
-        StringBuffer stringBuffer = new StringBuffer();
-        char[] email = string.toCharArray();
-        Random random= new Random();
-        for (char ch : email) {
-            double r = random.nextDouble();
-            if (r < 0.45) {      // Decimal
-                stringBuffer.append("&#");
-                stringBuffer.append((int) ch);
-                stringBuffer.append(';');
-            } else if (r < 0.9) {  // Hex
-                stringBuffer.append("&#x");
-                stringBuffer.append(Integer.toString((int) ch, 16));
-                stringBuffer.append(';');
-            } else {
-                stringBuffer.append(ch);
-            }
-        }
-        return stringBuffer.toString();
     }
 
     /**
