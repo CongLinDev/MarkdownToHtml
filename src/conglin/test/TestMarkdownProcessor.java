@@ -11,7 +11,7 @@ import java.util.Scanner;
 public class TestMarkdownProcessor {
     /**
      * 主方法
-     * @param args
+     * @param args 主指令
      */
     public static void main(String[] args) {
         try(Scanner scan = new Scanner(System.in)) {    //从标准输入流中读取信息
@@ -28,8 +28,8 @@ public class TestMarkdownProcessor {
 
     /**
      * 检测MarkdownProcessor具体方法
-     * @param sourceFileName
-     * @throws FileNotFoundException
+     * @param sourceFileName 源文件名
+     * @throws FileNotFoundException 抛出FileNotFoundException异常
      */
     public static void process(String sourceFileName) throws FileNotFoundException {
         String destinationFileName = sourceFileName + ".html";

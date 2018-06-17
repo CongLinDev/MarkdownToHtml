@@ -19,7 +19,7 @@ public class MarkdownProcessor {
 
     /**
      * 由String构造生成对象
-     * @param markdownContent
+     * @param markdownContent String类型字符串构造MarkdownProcessor对象
      */
     public MarkdownProcessor(String markdownContent) {
         this.listLevel = 0;
@@ -32,7 +32,7 @@ public class MarkdownProcessor {
 
     /**
      * 由StringBuffer构造生成对象
-     * @param markdownContent
+     * @param markdownContent StringBuffer类型字符串构造MarkdownProcessor对象
      */
     public MarkdownProcessor(StringBuffer markdownContent) {
         this.listLevel = 0;
@@ -45,6 +45,7 @@ public class MarkdownProcessor {
 
     /**
      * 转化的主方法
+     * @return 返回一个已经处理好的String对象
      */
     public String translate(){
         markdownContentEditor = formatContent(markdownContentEditor);
@@ -57,8 +58,8 @@ public class MarkdownProcessor {
 
     /**
      * 处理块元素，例如标题、分割线、列表、斜体、加粗、删除线、标记等
-     * @param _markdownContentEditor
-     * @return
+     * @param _markdownContentEditor MarkdownContentEditor对象
+     * @return 返回一个已经处理标题、分割线、列表、斜体、加粗、删除线、标记的MarkdownContentEditor对象
      */
     public MarkdownContentEditor runBlockItem(MarkdownContentEditor _markdownContentEditor){
         _markdownContentEditor = doHeaders(_markdownContentEditor);      //标题
@@ -71,8 +72,8 @@ public class MarkdownProcessor {
 
     /**
      * 处理跨区域元素，例如图片、链接等
-     * @param _markdownContentEditor
-     * @return
+     * @param _markdownContentEditor MarkdownContentEditor对象
+     * @return 返回一个已经处理跨区域元素，例如图片、链接等的MarkdownContentEditor对象
      */
     public MarkdownContentEditor runSpanItem(MarkdownContentEditor _markdownContentEditor){
         _markdownContentEditor = doImages(_markdownContentEditor);//图片
@@ -86,20 +87,21 @@ public class MarkdownProcessor {
     }
 
     /**
-     * 格式化内容，将换行符统一为\n
-     * @param _markdownContentEditor
-     * @return
+     * 格式化内容，将换行符统一为\n, \t转为四个空格
+     * @param _markdownContentEditor MarkdownContentEditor对象
+     * @return 返回一个已经格式化处理的MarkdownContentEditor对象
      */
     private MarkdownContentEditor formatContent(MarkdownContentEditor _markdownContentEditor){
         _markdownContentEditor.replaceAll("\\r\\n", "\n"); 	// DOS to Unix
         _markdownContentEditor.replaceAll("\\r", "\n");    	// Mac to Unix
+        _markdownContentEditor = _markdownContentEditor.tabToSpaces();
         return _markdownContentEditor;
     }
 
     /**
-     * 处理段落，加入<p>  </p>
+     * 处理段落
      * @param _markdownContentEditor
-     * @return
+     * @return 返回一个已经处理段落的MarkdownContentEditor对象
      */
     private MarkdownContentEditor formParagraphs(MarkdownContentEditor _markdownContentEditor){
         //去除字符串首尾多余的 \n
@@ -109,15 +111,15 @@ public class MarkdownProcessor {
         MarkdownContentEditor markdownContentEditorArray[] = MarkdownContentEditor.split(_markdownContentEditor ,"\\n{2,}");
         for(int i = 0; i < markdownContentEditorArray.length; i++){
             markdownContentEditorArray[i] = runSpanItem(markdownContentEditorArray[i]);
-            markdownContentEditorArray[i].prepend("<p>").append("</p>");
+            markdownContentEditorArray[i].prepend("<p>").append("</p>");//加入<p>  </p>
         }
         return MarkdownContentEditor.join(markdownContentEditorArray, "\n\n");
     }
 
     /**
      * 斜体、加粗、删除线、标记区段处理
-     * @param _markdownContentEditor
-     * @return
+     * @param _markdownContentEditor MarkdownContentEditor对象
+     * @return 返回一个已经处理斜体、加粗、删除线、标记区段的MarkdownContentEditor对象
      */
     private MarkdownContentEditor doItalicsAndBoldAndDeletelineAndSign(MarkdownContentEditor _markdownContentEditor){
         _markdownContentEditor.replaceAll("(\\*\\*|__)(?=\\S)(.+?[*_]*)(?<=\\S)\\1", "<strong>$2</strong>");
@@ -129,8 +131,8 @@ public class MarkdownProcessor {
 
     /**
      * 处理标题
-     * @param _markdownContentEditor
-     * @return
+     * @param _markdownContentEditor MarkdownContentEditor对象
+     * @return 返回一个已经处理标题的MarkdownContentEditor对象
      */
     private MarkdownContentEditor doHeaders (MarkdownContentEditor _markdownContentEditor){
         // Setext 风格的标题
@@ -154,9 +156,9 @@ public class MarkdownProcessor {
     }
 
     /**
-     * 处理分割线 <hr />
-     * @param _markdownContentEditor
-     * @return
+     * 处理分割线
+     * @param _markdownContentEditor MarkdownContentEditor对象
+     * @return 返回一个已经处理分割线的MarkdownContentEditor对象
      */
     private MarkdownContentEditor doDividingLine(MarkdownContentEditor _markdownContentEditor){
         String[] hrDelimiters = {"\\*", "-", "_"};
@@ -169,20 +171,21 @@ public class MarkdownProcessor {
     }
 
     /**
-     * 处理 & 和 <
-     * @param _markdownContentEditor
-     * @return
+     * 处理特殊符号
+     * @param _markdownContentEditor MarkdownContentEditor对象
+     * @return 返回一个已经处理特殊符号的MarkdownContentEditor对象
      */
     private MarkdownContentEditor encodeAmpsAndAngles(MarkdownContentEditor _markdownContentEditor){
+        //处理 & 和 <
         _markdownContentEditor.replaceAll("&(?!#?[xX]?(?:[0-9a-fA-F]+|\\w+);)", "&amp;");
         _markdownContentEditor.replaceAll("<(?![a-zA-Z/?\\$!])", "&lt;");
         return _markdownContentEditor;
     }
 
     /**
-     * 将链接加入linkDefinitions 其类型为 Map <String, LinkDefinition>
-     * @param _markdownContentEditor
-     * @return
+     * 将链接加入linkDefinitions
+     * @param _markdownContentEditor MarkdownContentEditor对象
+     * @return 将链接加入Map中，返回处理后的MarkdownContentEditor对象
      */
     private MarkdownContentEditor stripLinkDefinitions(MarkdownContentEditor _markdownContentEditor) {
         Pattern pattern = Pattern.compile("^[ ]{0,3}\\[(.+)\\]:" + // $1 是ID
@@ -212,11 +215,12 @@ public class MarkdownProcessor {
     }
 
     /**
-     * 自动跳转链接 例如 <https://CongLinDev.github.io> 会出现蓝色链接
-     * @param _markdownContentEditor
-     * @return
+     * 自动跳转链接
+     * @param _markdownContentEditor MarkdownContentEditor对象
+     * @return 返回一个已经处理自动跳转链接的MarkdownContentEditor对象
      */
     private MarkdownContentEditor doAutoLinks(MarkdownContentEditor _markdownContentEditor) {
+        //自动跳转链接 例如 <https://CongLinDev.github.io> 会出现蓝色链接
         _markdownContentEditor.replaceAll("<((http?|https?|ftp):[^'\">\\s]+)>", "<a href=\"$1\">$1</a>");
         Pattern email = Pattern.compile("<([-.\\w]+\\@[-a-z0-9]+(\\.[-a-z0-9]+)*\\.[a-z]+)>");
         _markdownContentEditor.replaceAll(email, new Replacement() {
@@ -232,15 +236,17 @@ public class MarkdownProcessor {
 
     /**
      * 处理参考式链接
-     * 例如：
-     *    [从林的Github][1]
-     *    [从林的Github博客主页][2]
-     *    [1]:https://github.com/CongLinDev
-     *    [2]:https:://CongLinDev.github.io "这是一个可选的标题"
-     * @param _markdownContentEditor
-     * @return
+     * @param _markdownContentEditor MarkdownContentEditor对象
+     * @return 返回一个已经处理参考式链接的MarkdownContentEditor对象
      */
     private MarkdownContentEditor doReferencesLinks(MarkdownContentEditor _markdownContentEditor){
+        /*
+         * 例如：
+         *    [从林的Github][1]
+         *    [从林的Github博客主页][2]
+         *    [1]:https://github.com/CongLinDev
+         *    [2]:https:://CongLinDev.github.io "这是一个可选的标题"
+         */
         Pattern referencesLink = Pattern.compile("(" +
                 "\\[(.*?)\\]" + // 链接文本 = $2
                 "[ ]?(?:\\n[ ]*)?" +
@@ -279,12 +285,14 @@ public class MarkdownProcessor {
 
     /**
      * 处理行内式链接
-     * 例如：
-     *    [从林的Github](https://github.com/CongLinDev "这是一个可选的标题")
-     * @param _markdownContentEditor
-     * @return
+     * @param _markdownContentEditor MarkdownContentEditor对象
+     * @return 返回一个已经处理行内式链接的MarkdownContentEditor对象
      */
     private MarkdownContentEditor doInlineLinks(MarkdownContentEditor _markdownContentEditor){
+        /*
+         * 例如：
+         *    [从林的Github](https://github.com/CongLinDev "这是一个可选的标题")
+         */
         Pattern inlineLink = Pattern.compile("(" + // 全部匹配 = $1
                 "\\[(.*?)\\]" + // 链接文本 = $2
                 "\\(" +
@@ -322,8 +330,8 @@ public class MarkdownProcessor {
 
     /**
      * 处理图片
-     * @param _markdownContentEditor
-     * @return
+     * @param _markdownContentEditor MarkdownContentEditor对象
+     * @return 返回一个已经处理图片的MarkdownContentEditor对象
      */
     private MarkdownContentEditor doImages(MarkdownContentEditor _markdownContentEditor){
         //内嵌图片
@@ -368,8 +376,8 @@ public class MarkdownProcessor {
 
     /**
      * 处理列表
-     * @param _markdownContentEditor
-     * @return
+     * @param _markdownContentEditor MarkdownContentEditor对象
+     * @return 返回一个已经处理列表的MarkdownContentEditor对象
      */
     private MarkdownContentEditor doLists(MarkdownContentEditor _markdownContentEditor){
 
@@ -441,8 +449,8 @@ public class MarkdownProcessor {
 
     /**
      * 处理列表内元素
-     * @param list
-     * @return
+     * @param list String对象
+     * @return 返回一个已经处理列表元素的String对象
      */
     private String processListItems(String list){
         list = list.replaceAll("\\n{2,}\\z", "\n");//删除多余空行

@@ -9,8 +9,8 @@ public class LinkDefinition {
 
     /**
      * 构造 LinkDefinition
-     * @param url
-     * @param title
+     * @param url URL
+     * @param title Title
      */
     public LinkDefinition(String url, String title) {
         this.url = url;
@@ -19,7 +19,7 @@ public class LinkDefinition {
 
     /**
      * 获得LinkDefinition对象的URL
-     * @return
+     * @return 返回LinkDefinition对象的URL
      */
     public String getUrl() {
         return url;
@@ -27,7 +27,7 @@ public class LinkDefinition {
 
     /**
      * 获得LinkDefinition对象的Title
-     * @return
+     * @return 返回LinkDefinition对象的Title
      */
     public String getTitle() {
         return title;
@@ -35,7 +35,7 @@ public class LinkDefinition {
 
     /**
      * LinkDefinition对象转String，格式为   url + " (" + title + ")"
-     * @return
+     * @return 返回特定格式的LinkDefinition对象的字符串
      */
     @Override
     public String toString() {

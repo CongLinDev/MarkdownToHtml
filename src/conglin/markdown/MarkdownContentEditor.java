@@ -18,7 +18,7 @@ public class MarkdownContentEditor {
 
     /**
      * 由String构造生成对象
-     * @param _markdownContent
+     * @param _markdownContent String类型对象构造生成MarkdownContentEditor对象
      */
     public MarkdownContentEditor(String _markdownContent){
         this.markdownContent = new StringBuffer(_markdownContent);
@@ -26,7 +26,7 @@ public class MarkdownContentEditor {
 
     /**
      * 由StringBuffer构造生成对象
-     * @param _markdownContent
+     * @param _markdownContent StringBuffer类型对象构造生成MarkdownContentEditor对象
      */
     public MarkdownContentEditor(StringBuffer _markdownContent) {
         this.markdownContent = _markdownContent;
@@ -34,7 +34,7 @@ public class MarkdownContentEditor {
 
     /**
      * 返回一个String字符串
-     * @return
+     * @return MarkdownContentEditor对象转为字符串
      */
     @Override
     public String toString() {
@@ -43,9 +43,9 @@ public class MarkdownContentEditor {
 
     /**
      * 利用正则表达式替换对象中所有满足正则表达式的字符串
-     * @param regex
-     * @param replacementContent
-     * @return
+     * @param regex 正则表达式内容
+     * @param replacementContent 取代的内容
+     * @return 正则表达式替换后的MarkdownContentEditor对象
      */
     public MarkdownContentEditor replaceAll(String regex, String replacementContent){
         if(this.markdownContent.length()>0){
@@ -68,9 +68,9 @@ public class MarkdownContentEditor {
 
     /**
      * 利用正则表达式替换对象中所有满足正则表达式的字符串
-     * @param pattern
-     * @param replacement
-     * @return
+     * @param pattern 正则表达式所订制的模式
+     * @param replacement 取代的内容
+     * @return 模式替换后的MarkdownContentEditor对象
      */
      public MarkdownContentEditor replaceAll(Pattern pattern, Replacement replacement){
          Matcher matcher = pattern.matcher(markdownContent);
@@ -94,17 +94,17 @@ public class MarkdownContentEditor {
 
      /**
       * 删除正则表达式匹配的字符
-      *	@param pattern Regular expression
-      * @return
+      *	@param pattern 正则表达式所订制的模式
+      * @return 模式删除后的MarkdownContentEditor对象
       */
      public MarkdownContentEditor deleteAll(String pattern){
          return this.replaceAll (pattern ,"");
      }
 
     /**
-     * 制表符转空格，默认为4个
-     * @param tabWidth
-     * @return
+     * 制表符转空格
+     * @param tabWidth 空格个数
+     * @return 制表符转空格后的MarkdownContentEditor对象
      */
     public MarkdownContentEditor tabToSpaces(int tabWidth){
         replaceAll(Pattern.compile("(.*?)\\t"), new Replacement() {
@@ -123,7 +123,7 @@ public class MarkdownContentEditor {
     }
     /**
      * 制表符转空格，默认为4个
-     * @return
+     * @return 制表符转空格后的MarkdownContentEditor对象
      */
      public MarkdownContentEditor tabToSpaces(){
          return tabToSpaces(TAB_WIDTH);
@@ -131,7 +131,7 @@ public class MarkdownContentEditor {
 
     /**
      * 检测markdownContent是否为空
-     * @return
+     * @return 空则返回true
      */
     public boolean isEmpty() {
         return markdownContent.length() == 0;
@@ -139,8 +139,8 @@ public class MarkdownContentEditor {
 
     /**
      * 在MarkdownContentEditor对象前插入一个字符串
-     * @param string
-     * @return
+     * @param string 插入的字符串
+     * @return 插入的字符串后的MarkdownContentEditor对象
      */
     public MarkdownContentEditor prepend(String string) {
         markdownContent.insert(0, string);
@@ -149,8 +149,8 @@ public class MarkdownContentEditor {
 
     /**
      * 在MarkdownContentEditor对象追加一个字符串
-     * @param string
-     * @return
+     * @param string 追加的字符串
+     * @return 追加的字符串后的MarkdownContentEditor对象
      */
     public MarkdownContentEditor append(String string){
         markdownContent.append(string);
@@ -159,9 +159,9 @@ public class MarkdownContentEditor {
 
     /**
      * 按照正则表达式将一个MarkdownContentEditor对象分成多个MarkdownContentEditor对象，并返回一个MarkdownContentEditor数组
-     * @param _markdownContentEditor
-     * @param regex
-     * @return
+     * @param _markdownContentEditor 一个MarkdownContentEditor对象
+     * @param regex 正则表达式
+     * @return 按照正则表达式拆分后的MarkdownContentEditor对象数组名
      */
     public static MarkdownContentEditor[] split(MarkdownContentEditor _markdownContentEditor, String regex){
         MarkdownContentEditor[] markdownContentEditorArray = null;
@@ -180,9 +180,9 @@ public class MarkdownContentEditor {
 
     /**
      * 将MarkdownContentEditor数组以特定字符连接起来生成一个新的MarkdownContentEditor对象
-     * @param markdownContentEditorArray
-     * @param string
-     * @return
+     * @param markdownContentEditorArray MarkdownContentEditor数组名
+     * @param string 特定字符
+     * @return 以特定字符连接起来生成的新的MarkdownContentEditor对象
      */
     public static MarkdownContentEditor join(MarkdownContentEditor[] markdownContentEditorArray,String string){
         StringBuffer stringBuffer = new StringBuffer();
