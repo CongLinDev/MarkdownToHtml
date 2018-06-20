@@ -124,8 +124,8 @@ public class MarkdownProcessor {
     private MarkdownContentEditor doItalicsAndBoldAndDeletelineAndSign(MarkdownContentEditor _markdownContentEditor){
         _markdownContentEditor.replaceAll("(\\*\\*|__)(?=\\S)(.+?[*_]*)(?<=\\S)\\1", "<strong>$2</strong>");
         _markdownContentEditor.replaceAll("(\\*|_)(?=\\S)(.+?)(?<=\\S)\\1", "<em>$2</em>");
-        _markdownContentEditor.replaceAll("(\\~\\~|__)(?=\\S)(.+?[*_]*)(?<=\\S)\\1","<s>$2</s>");
-        _markdownContentEditor.replaceAll("(\\`|_)(?=\\S)(.+?)(?<=\\S)\\1", "<code>$2</code>");
+        _markdownContentEditor.replaceAll("(\\~\\~)(?=\\S)(.+?[*_]*)(?<=\\S)\\1","<s>$2</s>");
+        _markdownContentEditor.replaceAll("(\\`)(?=\\S)(.+?)(?<=\\S)\\1", "<code>$2</code>");
         return _markdownContentEditor;
     }
 
