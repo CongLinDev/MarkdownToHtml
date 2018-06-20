@@ -222,15 +222,8 @@ public class MarkdownProcessor {
     private MarkdownContentEditor doAutoLinks(MarkdownContentEditor _markdownContentEditor) {
         //自动跳转链接 例如 <https://CongLinDev.github.io> 会出现蓝色链接
         _markdownContentEditor.replaceAll("<((http?|https?|ftp):[^'\">\\s]+)>", "<a href=\"$1\">$1</a>");
-        Pattern email = Pattern.compile("<([-.\\w]+\\@[-a-z0-9]+(\\.[-a-z0-9]+)*\\.[a-z]+)>");
-        _markdownContentEditor.replaceAll(email, new Replacement() {
-            @Override
-            public String replacementString(Matcher matcher) {
-                String address = matcher.group(1);
-                MarkdownContentEditor tempEditor = new MarkdownContentEditor(address);
-                return "<a href=\"" + "mailto:" + tempEditor.toString() + "\">" + tempEditor.toString() + "</a>";
-            }
-        });
+        _markdownContentEditor.replaceAll("<([-.\\w]+\\@[-a-z0-9]+(\\.[-a-z0-9]+)*\\.[a-z]+)>",
+                                         "<a href=\"mailto:$1\">$1</a>");
         return _markdownContentEditor;
     }
 
