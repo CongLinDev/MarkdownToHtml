@@ -18,13 +18,17 @@ Why not trying the list?
 **Unordered list**
 
 - First of all...
+
 + In addition...
+
 * Last but not least...
 
 **Ordered list**
 
 1. First...
-2. Second...
+
+3. Second...
+
 3. Third...
 
 
@@ -54,6 +58,10 @@ test Internet picture...
 
 ![Internet](https://i.loli.net/2018/06/15/5b23b74f0d883.jpg)
 
+test reference piceure...
+
+![Alt text][address]
+
 
 # This is another format first level heading.
 
@@ -68,3 +76,5 @@ contact me : <conglindev@live.com>
 
 [1]:https://github.com/CongLinDev
 [2]:https:://CongLinDev.github.io
+
+[address]:https://i.loli.net/2018/06/15/5b23b74f0d883.jpg

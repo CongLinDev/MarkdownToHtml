@@ -257,20 +257,19 @@ public class MarkdownProcessor {
                     id = linkContent.toLowerCase();
                 }
 
-                LinkDefinition tempLinkDefinition = linkDefinitions.get(id);{
-                    if(tempLinkDefinition != null){
-                        String url = tempLinkDefinition.getUrl();
-                        String title = tempLinkDefinition.getTitle();
-                        String titleTag = "";
-                        if(title != null && !title.equals("")){
-                            titleTag = " title=\"" + title + "\"";
-                        }
-                        replacementText= "<a href=\"" + url + "\"" + titleTag + ">" + linkContent + "</a>";
-                    }else {
-                        replacementText = matchedAllContent;
+                LinkDefinition tempLinkDefinition = linkDefinitions.get(id);
+                if(tempLinkDefinition != null){
+                    String url = tempLinkDefinition.getUrl();
+                    String title = tempLinkDefinition.getTitle();
+                    String titleTag = "";
+                    if(title != null && !title.equals("")){
+                        titleTag = " title=\"" + title + "\"";
                     }
-                    return replacementText;
+                    replacementText= "<a href=\"" + url + "\"" + titleTag + ">" + linkContent + "</a>";
+                }else {
+                    replacementText = matchedAllContent;
                 }
+                return replacementText;
             }
         });
         return _markdownContentEditor;
@@ -446,6 +445,8 @@ public class MarkdownProcessor {
      * @return 返回一个已经处理列表元素的String对象
      */
     private String processListItems(String list){
+        listLevel++;
+
         list = list.replaceAll("\\n{2,}\\z", "\n");//删除多余空行
         Pattern pattern = Pattern.compile("(\\n)?" +
                         "^([ \\t]*)([-+*]|\\d+[.])[ ]+" +

@@ -3,16 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="fcb60139-7e06-4eee-a312-f57415e65bf6" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MarkdownToHtml/conglin/markdown/MarkdownProcessor$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MarkdownToHtml/conglin/markdown/MarkdownProcessor$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MarkdownToHtml/conglin/markdown/MarkdownProcessor$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MarkdownToHtml/conglin/markdown/MarkdownProcessor$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MarkdownToHtml/conglin/markdown/MarkdownProcessor$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MarkdownToHtml/conglin/markdown/MarkdownProcessor$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MarkdownToHtml/conglin/markdown/MarkdownProcessor$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MarkdownToHtml/conglin/markdown/MarkdownProcessor$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MarkdownToHtml/conglin/markdown/MarkdownProcessor$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MarkdownToHtml/conglin/markdown/MarkdownProcessor$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MarkdownToHtml/conglin/markdown/MarkdownProcessor$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MarkdownToHtml/conglin/markdown/MarkdownProcessor$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MarkdownToHtml/conglin/markdown/MarkdownProcessor$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MarkdownToHtml/conglin/markdown/MarkdownProcessor$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MarkdownToHtml/conglin/markdown/MarkdownProcessor$9.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MarkdownToHtml/conglin/markdown/MarkdownProcessor.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MarkdownToHtml/conglin/markdown/MarkdownProcessor.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/conglin/markdown/MarkdownProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/conglin/markdown/MarkdownProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/conglin/test/TestMarkdownProcessor.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/conglin/test/TestMarkdownProcessor.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/conglin/test/test.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/conglin/test/test.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/conglin/test/test.md.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/conglin/test/test.md.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -30,8 +24,8 @@
       <file leaf-file-name="MarkdownProcessor.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/conglin/markdown/MarkdownProcessor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-91">
-              <caret line="235" column="10" lean-forward="true" selection-start-line="235" selection-start-column="10" selection-end-line="235" selection-end-column="10" />
+            <state relative-caret-position="391">
+              <caret line="434" column="75" selection-start-line="434" selection-start-column="75" selection-end-line="434" selection-end-column="78" />
             </state>
           </provider>
         </entry>
@@ -39,10 +33,11 @@
       <file leaf-file-name="MarkdownContentEditor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/conglin/markdown/MarkdownContentEditor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="3211">
-              <caret line="184" column="52" selection-start-line="184" selection-start-column="52" selection-end-line="184" selection-end-column="52" />
+            <state relative-caret-position="176">
+              <caret line="24" selection-start-line="24" selection-end-line="24" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#515#516#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -51,8 +46,8 @@
       <file leaf-file-name="TestMarkdownProcessor.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/conglin/test/TestMarkdownProcessor.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="627">
-              <caret line="36" column="61" selection-start-line="36" selection-start-column="61" selection-end-line="36" selection-end-column="61" />
+            <state relative-caret-position="332">
+              <caret line="37" column="35" lean-forward="true" selection-start-line="37" selection-start-column="35" selection-end-line="37" selection-end-column="35" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -78,6 +73,7 @@
       <find>id.replaceAll</find>
       <find>stripLinkDefinitions</find>
       <find>toS</find>
+      <find>processListItems</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -105,10 +101,9 @@
     <packageJsonPaths />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="122" />
-    <option name="y" value="87" />
-    <option name="width" value="1570" />
-    <option name="height" value="960" />
+    <option name="x" value="40" />
+    <option name="width" value="1603" />
+    <option name="height" value="1038" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -131,8 +126,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
-      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -183,7 +177,8 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
+      <pane id="Scope" />
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -289,14 +284,15 @@
       <workItem from="1529233861682" duration="1379000" />
       <workItem from="1529235353269" duration="423000" />
       <workItem from="1529506808812" duration="240000" />
+      <workItem from="1530016923411" duration="3022000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="44047000" />
+    <option name="totallyTimeSpent" value="47069000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="98" y="70" width="1256" height="768" extended-state="0" />
+    <frame x="32" y="0" width="1282" height="830" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="3" />
@@ -309,18 +305,18 @@
       <window_info anchor="right" id="Maven Projects" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.27522936" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.19889502" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
       <window_info id="Designer" order="2" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23107891" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2263407" />
       <window_info anchor="right" id="Database" order="3" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info anchor="right" id="Theme Preview" order="3" />
       <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.35911602" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
@@ -337,10 +333,38 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="6" />
+      <option name="time" value="10" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/conglin/markdown/MarkdownProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4465">
+          <caret line="235" column="10" lean-forward="true" selection-start-line="235" selection-start-column="10" selection-end-line="235" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/conglin/markdown/MarkdownContentEditor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="3496">
+          <caret line="184" column="52" selection-start-line="184" selection-start-column="52" selection-end-line="184" selection-end-column="52" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#515#516#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/conglin/test/TestMarkdownProcessor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="684">
+          <caret line="36" column="61" selection-start-line="36" selection-start-column="61" selection-end-line="36" selection-end-column="61" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/conglin/markdown/MarkdownProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4218">
@@ -354,6 +378,7 @@
           <caret line="184" column="52" selection-start-line="184" selection-start-column="52" selection-end-line="184" selection-end-column="52" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#515#516#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -381,6 +406,7 @@
           <caret line="184" column="14" lean-forward="true" selection-start-line="184" selection-start-column="14" selection-end-line="184" selection-end-column="14" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#515#516#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -408,6 +434,7 @@
           <caret line="124" column="19" lean-forward="true" selection-start-line="124" selection-start-column="19" selection-end-line="124" selection-end-column="19" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#515#516#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -425,6 +452,7 @@
           <caret line="19" column="7" selection-start-line="19" selection-start-column="7" selection-end-line="19" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#515#516#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -466,6 +494,7 @@
           <caret line="68" column="86" selection-start-line="68" selection-start-column="86" selection-end-line="68" selection-end-column="86" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#515#516#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -500,6 +529,7 @@
           <caret line="183" selection-start-line="183" selection-end-line="183" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#515#516#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -642,8 +672,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/conglin/test/TestMarkdownProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="627">
-          <caret line="36" column="61" selection-start-line="36" selection-start-column="61" selection-end-line="36" selection-end-column="61" />
+        <state relative-caret-position="332">
+          <caret line="37" column="35" lean-forward="true" selection-start-line="37" selection-start-column="35" selection-end-line="37" selection-end-column="35" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -652,18 +682,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/conglin/markdown/MarkdownContentEditor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3211">
-          <caret line="184" column="52" selection-start-line="184" selection-start-column="52" selection-end-line="184" selection-end-column="52" />
+        <state relative-caret-position="176">
+          <caret line="24" selection-start-line="24" selection-end-line="24" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#515#516#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/conglin/markdown/MarkdownProcessor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-91">
-          <caret line="235" column="10" lean-forward="true" selection-start-line="235" selection-start-column="10" selection-end-line="235" selection-end-column="10" />
+        <state relative-caret-position="391">
+          <caret line="434" column="75" selection-start-line="434" selection-start-column="75" selection-end-line="434" selection-end-column="78" />
         </state>
       </provider>
     </entry>

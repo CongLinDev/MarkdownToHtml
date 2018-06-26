@@ -18,9 +18,7 @@ public class TestMarkdownProcessor {
             System.out.print("Please enter the name of source file: ");
             String sourceFileName = scan.next();
 
-            //针对Windows的目录结构进行修改
-            sourceFileName.replaceAll("\\\\", "\\\\\\\\");
-            process(sourceFileName);
+            System.out.println(process(sourceFileName) + " " + "has finished.");
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -29,9 +27,10 @@ public class TestMarkdownProcessor {
     /**
      * 检测MarkdownProcessor具体方法
      * @param sourceFileName 源文件名
+     * @return 返回目标文件名
      * @throws FileNotFoundException 抛出FileNotFoundException异常
      */
-    public static void process(String sourceFileName) throws FileNotFoundException {
+    public static String process(String sourceFileName) throws FileNotFoundException {
         String destinationFileName = sourceFileName + ".html";
         File sourceFile = new File(sourceFileName);
         File destinationFile = new File(destinationFileName);
@@ -61,5 +60,7 @@ public class TestMarkdownProcessor {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return destinationFileName;
     }
 }
