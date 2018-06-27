@@ -206,7 +206,7 @@ public class MarkdownProcessor {
                 if (title == null) {
                     title = "";
                 }
-                title = title.replaceAll("\"", "&quot;");
+                title = title.replaceAll("\"", "&quot;");//引号转为 &quot;
                 linkDefinitions.put(id, new LinkDefinition(url, title));
                 return "";
             }

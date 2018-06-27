@@ -4,18 +4,18 @@ _Let us try it now!_
 
 ***
 
-Look, these is two dividing lines above and below!
+在这儿上下各有一条分割线。
 
 ---
 
-And we can try the Title.
+现在我们来测试标题
 
-This is a first level heading.
+这是一级标题。
 ====
 
-Why not trying the list?
+测试列表
 
-**Unordered list**
+**无序列表**
 
 - First of all...
 
@@ -23,7 +23,7 @@ Why not trying the list?
 
 * Last but not least...
 
-**Ordered list**
+**有序列表**
 
 1. First...
 
@@ -32,10 +32,10 @@ Why not trying the list?
 3. Third...
 
 
-Meanwhile, this is a second level heading.
+Meanwhile, 这是一个二级标题。
 -----
 
-Let us try the links!
+开始测试链接...
 
 **Inline-style links**
 
@@ -48,26 +48,26 @@ Let us try the links!
 * [CongLin's GitHub][1]
 * [CongLin's Blog][2]
 
-_testing picture links_
+_测试图片链接_
 
-test local picture...
+本地图片...
 
-![local](E:\3-0.jpg)
+![local](.\3-0.jpg)
 
-test Internet picture...
+网络图片...
 
 ![Internet](https://i.loli.net/2018/06/15/5b23b74f0d883.jpg)
 
-test reference piceure...
+参考式图片...
 
 ![Alt text][address]
 
 
-# This is another format first level heading.
+# 这是另一种一级标题.
 
 Lastly, thanks to <https://github.com/younghz/Markdown> for the referances of markdown grammars.
 
-## Of course, second level heading has another format.
+## 另一种二级标题.
 
 
 ~~Oh, sorry and I cannot realize the table of markdown.~~
