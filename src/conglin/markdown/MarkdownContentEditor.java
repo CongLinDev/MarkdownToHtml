@@ -167,7 +167,8 @@ public class MarkdownContentEditor {
         MarkdownContentEditor[] markdownContentEditorArray = null;
         String []stringArray = null;
         if(_markdownContentEditor.isEmpty()){
-            markdownContentEditorArray = new MarkdownContentEditor[0];
+            markdownContentEditorArray = new MarkdownContentEditor[1];
+            markdownContentEditorArray[0] = _markdownContentEditor;
         }else {
             stringArray = Pattern.compile(regex).split(_markdownContentEditor.toString());
             markdownContentEditorArray = new MarkdownContentEditor[stringArray.length];

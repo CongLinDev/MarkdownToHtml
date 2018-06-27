@@ -19,7 +19,7 @@ public class TestMarkdownProcessor {
             String sourceFileName = scan.next();
 
             System.out.println(process(sourceFileName) + " " + "has finished.");
-        }catch (Exception e){
+        }catch (FileNotFoundException e){
             e.printStackTrace();
         }
     }

@@ -215,13 +215,15 @@ public class MarkdownProcessor {
     }
 
     /**
-     * 自动跳转链接
+     * 自动跳转链接(网址和邮箱)
      * @param _markdownContentEditor MarkdownContentEditor对象
      * @return 返回一个已经处理自动跳转链接的MarkdownContentEditor对象
      */
     private MarkdownContentEditor doAutoLinks(MarkdownContentEditor _markdownContentEditor) {
-        //自动跳转链接 例如 <https://CongLinDev.github.io> 会出现蓝色链接
-        _markdownContentEditor.replaceAll("<((http?|https?|ftp):[^'\">\\s]+)>", "<a href=\"$1\">$1</a>");
+        //例如 <https://CongLinDev.github.io> 会出现蓝色链接
+        _markdownContentEditor.replaceAll("<((http?|https?|ftp):[^'\">\\s]+)>",
+                                            "<a href=\"$1\">$1</a>");
+        //例如 <conglindev@live.com> 会出现蓝色链接
         _markdownContentEditor.replaceAll("<([-.\\w]+\\@[-a-z0-9]+(\\.[-a-z0-9]+)*\\.[a-z]+)>",
                                          "<a href=\"mailto:$1\">$1</a>");
         return _markdownContentEditor;
@@ -241,9 +243,9 @@ public class MarkdownProcessor {
          *    [2]:https:://CongLinDev.github.io "这是一个可选的标题"
          */
         Pattern referencesLink = Pattern.compile("(" +
-                "\\[(.*?)\\]" + // 链接文本 = $2
+                "\\[(.*?)\\]" + // 链接文本 是 $2
                 "[ ]?(?:\\n[ ]*)?" +
-                "\\[(.*?)\\]" + // ID = $3
+                "\\[(.*?)\\]" + // ID 是 $3
                 ")");
         _markdownContentEditor.replaceAll(referencesLink, new Replacement() {
             @Override
@@ -286,14 +288,14 @@ public class MarkdownProcessor {
          *    [从林的Github](https://github.com/CongLinDev "这是一个可选的标题")
          */
         Pattern inlineLink = Pattern.compile("(" + // 全部匹配 = $1
-                "\\[(.*?)\\]" + // 链接文本 = $2
+                "\\[(.*?)\\]" + // 链接文本 是 $2
                 "\\(" +
                 "[ \\t]*" +
-                "<?(.*?)>?" + // href = $3
+                "<?(.*?)>?" + // href 是 $3
                 "[ \\t]*" +
                 "(" +
-                "(['\"])" + // 引用字符 = $5
-                "(.*?)" + // 标题 = $6
+                "(['\"])" + // 引用字符 是 $5
+                "(.*?)" + // 标题 是 $6
                 "\\5" +
                 ")?" +
                 "\\)" +
@@ -332,9 +334,9 @@ public class MarkdownProcessor {
 
         // 参考式图片
         Pattern imageLink = Pattern.compile("(" +
-                "[!]\\[(.*?)\\]" + // alt text = $2
+                "[!]\\[(.*?)\\]" + // alt text 是 $2
                 "[ ]?(?:\\n[ ]*)?" +
-                "\\[(.*?)\\]" + // ID = $3
+                "\\[(.*?)\\]" + // ID 是 $3
                 ")");
         _markdownContentEditor.replaceAll(imageLink, new Replacement() {
             @Override
@@ -347,7 +349,6 @@ public class MarkdownProcessor {
                     id = altText.toLowerCase();
                 }
 
-                // 链接式图片
                 LinkDefinition linkDefinition = linkDefinitions.get(id);
                 if (linkDefinition != null) {
                     String url = linkDefinition.getUrl();
@@ -386,52 +387,31 @@ public class MarkdownProcessor {
                 "\\n{2,}" +
                 "(?=\\S)" +             // 如果没有结束就从下一个段落开始
                 "(?![ ]*" +
-                "(?:[-+*]|\\d+[.])" +
+                "(?:[-+*]|\\d+[.])" +   // 下一个列表标记
                 "[ ]+" +
-                ")" +               // 另一个列表标记的负向前视
-                ")" +
-                ")";
-        if(listLevel > 0){
-            Replacement tempReplacement = new Replacement() {
-                @Override
-                public String replacementString(Matcher matcher) {
-                    String matchedListContent = matcher.group(1);
-                    String listStart = matcher.group(3);
+                ")))";
+        Replacement tempReplacement = new Replacement() {
+            @Override
+            public String replacementString(Matcher matcher) {
+                String matchedListContent = matcher.group(1);
+                String listStart = matcher.group(3);        //列表标记，区分有序和无序
+                String listItems = processListItems(matchedListContent); //list的最终结果
+                listItems = listItems.replaceAll("\\s+$", "");//去除后续多余空格
 
-                    String listItems = processListItems(matchedListContent); //list的最终结果
-                    listItems = listItems.replaceAll("\\s+$", "");//去除后续多余空格
-
-                    String listResult;
-                    //如果listStart匹配 *或+或*    即为无序列表
-                    if(listStart.matches("[*+-]")){
-                        listResult = "<ul>" + listItems + "</ul>\n";
-                    }else {                     //否则为有序列表
-                        listResult = "<ol>" + listItems + "</ol>\n";
-                    }
-                    return listResult;
+                String listResult;
+                //如果listStart匹配 *或+或*    即为无序列表
+                if(listStart.matches("[*+-]")){
+                    listResult = "<ul>" + listItems + "</ul>\n";
+                }else {                     //否则为有序列表
+                    listResult = "<ol>" + listItems + "</ol>\n";
                 }
-            };
+                return listResult;
+            }
+        };
+        if(listLevel > 0){
             Pattern matchStartOfLine = Pattern.compile("^" + wholeList, Pattern.MULTILINE);
             _markdownContentEditor.replaceAll(matchStartOfLine, tempReplacement);
         }else {
-            Replacement tempReplacement = new Replacement() {
-                @Override
-                public String replacementString(Matcher matcher) {
-                    String matchedListContent = matcher.group(1);
-                    String listStart = matcher.group(3);
-                    String listItems = processListItems(matchedListContent); //list的最终结果
-                    listItems = listItems.replaceAll("\\s+$", "");//去除后续多余空格
-
-                    String listResult;
-                    //如果listStart匹配 *或+或*    即为无序列表
-                    if (listStart.matches("[*+-]")) {
-                        listResult = "<ul>\n" + listItems + "</ul>\n";
-                    } else {                     //否则为有序列表
-                        listResult = "<ol>\n" + listItems + "</ol>\n";
-                    }
-                    return listResult;
-                }
-            };
             Pattern matchStartOfLine = Pattern.compile("(?:(?<=\\n\\n)|\\A\\n?)" + wholeList, Pattern.MULTILINE);
             _markdownContentEditor.replaceAll(matchStartOfLine, tempReplacement);
         }
@@ -467,11 +447,12 @@ public class MarkdownProcessor {
                 }else{
                     //递归处理
                     tempItem = doLists(tempItem);
-                    tempItem = runSpanItem(tempItem);
+                    tempItem = runSpanItem(tempItem);       //处理跨区域元素
                 }
                 return "<li>" + tempItem.toString() + "</li>\n";
             }
         });
+
         listLevel--;
         return tempList.toString();
     }
